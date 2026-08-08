@@ -1,0 +1,28 @@
+/* ==========================================================================
+   SIGNUP PAGE — EXTRA STYLES
+   ==========================================================================
+   Signup page ka base look "login.css" se hi aata hai (card, inputs,
+   buttons — sab same rehta hai taaki dono pages match karein). Ye file
+   sirf wo cheezein add karti hai jo signup page mein extra hain, jaise
+   "password match" indicator.
+   ========================================================================== */
+
+.password-match-hint{
+    font-size: .75rem;
+    margin-top: 6px;
+    display: none;
+    align-items: center;
+    gap: 6px;
+}
+
+.password-match-hint.show{
+    display: flex;
+}
+
+.password-match-hint.ok{
+    color: var(--accent-gold-soft);
+}
+
+.password-match-hint.error{
+    color: var(--accent-rose);
+}

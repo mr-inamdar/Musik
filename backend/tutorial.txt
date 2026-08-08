@@ -1,0 +1,31 @@
+backend/
+│
+├── server.js
+├── package.json
+├── .env
+│
+├── config/
+│     └── db.js
+│
+├── routes/
+│     ├── authRoutes.js
+│     ├── songRoutes.js
+│     ├── playlistRoutes.js
+│     └── userRoutes.js
+│
+├── controllers/
+│     ├── authController.js
+│     ├── songController.js
+│     ├── playlistController.js
+│     └── userController.js
+│
+├── middleware/
+│     ├── authMiddleware.js
+│     └── uploadMiddleware.js
+│
+├── models/
+│     ├── User.js
+│     ├── Song.js
+│     └── Playlist.js
+│
+└── uploads/

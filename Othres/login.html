@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login — MUSIC2D</title>
+
+    <!-- theme.css = shared colors/fonts (poore app mein same) -->
+    <link rel="stylesheet" href="theme.css">
+    <!-- login.css = sirf is page ka layout/spacing -->
+    <link rel="stylesheet" href="login.css">
+</head>
+<body>
+
+    <div class="auth-card">
+
+        <div class="auth-logo">🎧</div>
+
+        <h2>Welcome Back</h2>
+        <p class="auth-subtitle">Login to keep listening</p>
+
+        <form id="loginForm" novalidate>
+
+            <div class="input-group">
+                <label for="emailInp">Email</label>
+                <div class="input-wrap">
+                    <i class="bi bi-envelope"></i>
+                    <input
+                        type="email"
+                        name="email"
+                        placeholder="Enter your email"
+                        required
+                        id="emailInp">
+                </div>
+                <span class="field-error" id="emailError">Please enter a valid email address</span>
+            </div>
+
+            <div class="input-group">
+                <label for="passwordInp">Password</label>
+                <div class="input-wrap">
+                    <i class="bi bi-lock"></i>
+                    <input
+                        type="password"
+                        name="password"
+                        placeholder="Enter your password"
+                        required
+                        id="passwordInp">
+                    <button type="button" class="toggle-password" id="togglePassword" aria-label="Show password">
+                        <i class="bi bi-eye"></i>
+                    </button>
+                </div>
+                <span class="field-error" id="passwordError">Password is required</span>
+            </div>
+
+            <div class="options">
+                <label>
+                    <input type="checkbox" name="remember">
+                    Remember Me
+                </label>
+                <a href="#">Forgot Password?</a>
+            </div>
+
+            <button type="submit" class="btn-primary" id="submitBtn">
+                Login
+            </button>
+
+        </form>
+
+        <div class="switch-link">
+            Don't have an account?
+            <a href="singup.html">Create Account</a>
+        </div>
+
+    </div>
+
+    <script src="JS/login.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,190 @@
+/* ==========================================================================
+   UPLOAD SONG FORM — STYLE
+   ==========================================================================
+   Same "Royal Night Concert" theme jo login/signup mein use hui — taaki
+   poora app ek design family jaisa lage. Colors/fonts theme.css se aa
+   rahe hain, yahan bas is form ka layout hai.
+   ========================================================================== */
+
+body{
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 40px 20px;
+    position: relative;
+    overflow-x: hidden;
+}
+
+/* ---- Background ambient glow ---- */
+body::before,
+body::after{
+    content: "";
+    position: fixed;
+    width: 450px;
+    height: 450px;
+    border-radius: 50%;
+    filter: blur(120px);
+    z-index: -1;
+}
+body::before{
+    top: -120px;
+    left: -120px;
+    background: var(--accent-gold);
+    opacity: .2;
+}
+body::after{
+    bottom: -120px;
+    right: -120px;
+    background: var(--accent-rose);
+    opacity: .16;
+}
+
+/* ---- Card ---- */
+.form-box{
+    width: 100%;
+    max-width: 640px;
+    padding: 36px;
+    background: var(--bg-1);
+    border: 1px solid var(--border-soft);
+    border-radius: var(--radius-lg);
+    box-shadow: 0 25px 60px -12px var(--shadow-color);
+    animation: cardRise var(--t-slow);
+}
+
+.form-box h2{
+    text-align: center;
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: 1.7rem;
+    margin-bottom: 8px;
+}
+
+.form-subtitle{
+    text-align: center;
+    color: var(--text-faint);
+    font-size: .85rem;
+    margin-bottom: 30px;
+}
+
+/* ---- Text Inputs ---- */
+.input-group{
+    margin-bottom: 20px;
+}
+
+.input-group label{
+    display: block;
+    margin-bottom: 8px;
+    color: var(--text-lo);
+    font-size: .82rem;
+    font-weight: 600;
+}
+
+.input-group input[type="text"]{
+    width: 100%;
+    padding: 13px 16px;
+    border-radius: var(--radius-md);
+    border: 1px solid var(--bg-4);
+    background: var(--bg-2);
+    color: var(--text-hi);
+    font-size: .95rem;
+    outline: none;
+    transition: border-color var(--t-fast), background var(--t-fast), box-shadow var(--t-fast);
+}
+
+.input-group input[type="text"]::placeholder{
+    color: var(--text-faint);
+}
+
+.input-group input[type="text"]:focus{
+    border-color: var(--accent-gold);
+    background: var(--bg-3);
+    box-shadow: 0 0 0 3px var(--border-soft);
+}
+
+/* ---- File Upload Box ---- */
+input[type="file"]{
+    display: none; /* hum apna custom "file-box" dikhate hain, browser ka default nahi */
+}
+
+.file-box{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    border: 2px dashed var(--bg-4);
+    border-radius: var(--radius-lg);
+    padding: 24px;
+    text-align: center;
+    cursor: pointer;
+    background: var(--bg-2);
+    color: var(--text-lo);
+    font-size: .9rem;
+    transition: border-color var(--t-fast), background var(--t-fast), box-shadow var(--t-fast);
+}
+
+.file-box:hover{
+    border-color: var(--accent-gold);
+    background: var(--bg-3);
+    box-shadow: 0 0 25px -8px var(--border-soft);
+}
+
+.file-box .file-name{
+    color: var(--accent-gold-soft);
+    font-weight: 600;
+}
+
+/* ---- Preview (image + audio) ---- */
+.preview-img{
+    display: none;
+    width: 170px;
+    height: 170px;
+    object-fit: cover;
+    margin: 18px auto 0;
+    border-radius: var(--radius-lg);
+    border: 3px solid var(--accent-gold);
+    box-shadow: 0 0 25px -6px var(--border-soft);
+}
+
+audio{
+    display: none;
+    margin-top: 16px;
+    width: 100%;
+    border-radius: var(--radius-md);
+}
+
+/* ---- Submit Button ---- */
+button[type="submit"]{
+    width: 100%;
+    padding: 15px;
+    border: none;
+    border-radius: var(--radius-pill);
+    background: linear-gradient(135deg, var(--accent-gold), var(--accent-rose));
+    color: var(--bg-0);
+    font-size: 1rem;
+    font-weight: 700;
+    cursor: pointer;
+    box-shadow: 0 10px 25px -6px var(--shadow-color);
+    transition: transform var(--t-fast), box-shadow var(--t-fast), filter var(--t-fast);
+}
+
+button[type="submit"]:hover{
+    transform: translateY(-2px);
+    filter: brightness(1.06);
+}
+
+button[type="submit"]:active{
+    transform: translateY(0) scale(.98);
+}
+
+button[type="submit"]:disabled{
+    opacity: .6;
+    cursor: not-allowed;
+    transform: none;
+}
+
+@media (max-width: 768px){
+    .form-box{
+        padding: 26px;
+    }
+}

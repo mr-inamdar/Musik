@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up — MUSIC2D</title>
+
+    <link rel="stylesheet" href="theme.css">
+    <link rel="stylesheet" href="login.css">   <!-- base card/input styles -->
+    <link rel="stylesheet" href="signup.css">  <!-- signup-only extras -->
+</head>
+<body>
+
+    <div class="auth-card">
+
+        <div class="auth-logo">🎧</div>
+
+        <h2>Create Account</h2>
+        <p class="auth-subtitle">Join and start building your playlists</p>
+
+        <form id="signupForm" novalidate>
+
+            <div class="input-group">
+                <label for="nameInp">Full Name</label>
+                <div class="input-wrap">
+                    <i class="bi bi-person"></i>
+                    <input
+                        type="text"
+                        name="name"
+                        placeholder="Enter your name"
+                        required
+                        id="nameInp">
+                </div>
+                <span class="field-error" id="nameError">Please enter your name</span>
+            </div>
+
+            <div class="input-group">
+                <label for="emailInp">Email</label>
+                <div class="input-wrap">
+                    <i class="bi bi-envelope"></i>
+                    <input
+                        type="email"
+                        name="email"
+                        placeholder="Enter your email"
+                        required
+                        id="emailInp">
+                </div>
+                <span class="field-error" id="emailError">Please enter a valid email address</span>
+            </div>
+
+            <div class="input-group">
+                <label for="passwordInp">Password</label>
+                <div class="input-wrap">
+                    <i class="bi bi-lock"></i>
+                    <input
+                        type="password"
+                        name="password"
+                        placeholder="Enter your password"
+                        required
+                        id="passwordInp">
+                    <button type="button" class="toggle-password" id="togglePassword1" aria-label="Show password">
+                        <i class="bi bi-eye"></i>
+                    </button>
+                </div>
+                <span class="field-error" id="passwordError">Password must be at least 6 characters</span>
+            </div>
+
+            <div class="input-group">
+                <label for="confirmPasswordInp">Confirm Password</label>
+                <div class="input-wrap">
+                    <i class="bi bi-lock-fill"></i>
+                    <input
+                        type="password"
+                        name="confirmPassword"
+                        placeholder="Confirm password"
+                        required
+                        id="confirmPasswordInp">
+                    <button type="button" class="toggle-password" id="togglePassword2" aria-label="Show password">
+                        <i class="bi bi-eye"></i>
+                    </button>
+                </div>
+                <!-- JS live check karke yahan green tick ya red cross dikhayega -->
+                <span class="password-match-hint" id="matchHint"></span>
+            </div>
+
+            <button type="submit" class="btn-primary" id="submitBtn">
+                Sign Up
+            </button>
+
+        </form>
+
+        <div class="switch-link">
+            Already have an account?
+            <a href="login.html">Login</a>
+        </div>
+
+    </div>
+
+    <script src="JS/singup.js"></script>
+
+</body>
+</html>
