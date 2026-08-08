@@ -8,20 +8,6 @@ const { pool } = require("../config/db");
 
 async function getAllSongs() {
 
-    // const sql = `
-    //     SELECT
-    //         song_id,
-    //         title,
-    //         artist,
-    //         album,
-    //         cover_url,
-    //         audio_url,
-    //         created_at,
-    //         uploadBy
-    //     FROM songs
-    //     ORDER BY  likes DESC, created_at DESC
-    // `;
-
     const sql = `
         SELECT
             songs.song_id,
@@ -109,55 +95,6 @@ async function createSong(song) {
     return result.insertId;
 
 }
-// async function getTopSongs() {
-
-//     const sql = `
-
-//         SELECT *
-
-//         FROM songs
-
-//         ORDER BY
-//             likes DESC,
-//             created_at DESC
-
-//     `;
-
-//     const [rows] = await pool.query(sql);
-
-//     return rows;
-
-// }
-
-// async function createSong(song) {
-
-//     const sql = `
-//         INSERT INTO songs
-//         (
-//             title,
-//             artist,
-//             album,
-//             image,
-//             audio
-//         )
-//         VALUES
-//         (
-//             ?,?,?,?,?
-//         )
-//     `;
-
-//     const [result] = await pool.query(sql, [
-
-//         song.title,
-//         song.artist,
-//         song.album,
-//         song.image,
-//         song.audio
-
-//     ]);
-
-//     return result.insertId;
-// }
 
 /*
 |--------------------------------------------------------------------------
@@ -175,30 +112,6 @@ async function deleteSong(id){
     await pool.query(sql,[id]);
 
 }
-
-// async function updateSong(songId, song) {
-
-//     const sql = `
-//         UPDATE songs
-//         SET
-//             title=?,
-//             artist=?,
-//             album=?
-//             cover_url=?,
-//             cover_public_id=?
-//         WHERE song_id=?
-//     `;
-
-//     await pool.query(sql, [
-//         song.title,
-//         song.artist,
-//         song.album,
-//         song.coverUrl,
-//         song.coverPublicId,
-//         songId
-//     ]);
-// }
-
 async function updateSong(songId, song) {
 
     const fields = [];
