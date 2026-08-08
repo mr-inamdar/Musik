@@ -2046,7 +2046,8 @@ footer h3{
         right: 25px;
     }
     .popup-box{
-        width: 90vw;
+        widh: 90vw;
+        max-width: 95vw;
         flex-direction: column;
     }
     .popup-box img {
