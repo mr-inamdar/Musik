@@ -104,35 +104,6 @@ async function songExists(playlistId, songId) {
 
     return row[0];
 }
-
-// async function getPlaylistSongs(PlaylistId) {
-//     const sql = `
-//         SELECT
-
-//             s.song_id,
-//             s.title,
-//             s.artist,
-//             s.album,
-//             s.cover_url,
-//             s.audio_url,
-//             s.uploadBy
-
-//         FROM playlist_songs ps
-
-//         INNER JOIN songs s
-
-//         ON ps.SongId = s.song_id
-
-//         WHERE ps.PlaylistId = ?;
-//     `;
-
-//     const [row] = await pool.query(sql, [
-//         PlaylistId
-//     ])
-
-//     return row;
-// }
-
 async function getPlaylistSongs(PlaylistId) {
     const sql = `
         SELECT
