@@ -76,19 +76,6 @@ async function createUser(user) {
     return result.insertId;
 }
 
-// async function deleteAccount(userId) {
-//     const sql = `
-//         DELETE FROM users
-//         WHERE UserId = ?
-//     `;
-
-//     const [result] = await pool.query(sql, [
-//         userId
-//     ]);
-
-//     return result.affectedRows;
-// }
-
 async function deleteAccount(userId) {
     const sql = `
         DELETE FROM users
