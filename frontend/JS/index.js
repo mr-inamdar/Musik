@@ -107,8 +107,6 @@ document.addEventListener('DOMContentLoaded', async () => {
         loginBtn.href = 'login.html';
         signinBtn.href = 'singup.html';
     }
-    // const token = localStorage.getItem("token");
-    // console.log(JSON.parse(atob(token.split(".")[1])));
 
     if (localStorage.getItem("user")) {
         const userData = localStorage.getItem("user");
@@ -394,14 +392,7 @@ function loadAndPlaySong(song) {
     }
 
     if (isPlaylist_song) {
-        // makeAllBackground();
         makeAllPlays();
-
-        // const listItems = document.querySelectorAll("#playlist_songs li");
-        // if (listItems[playlist_indexing]) {
-        //     listItems[playlist_indexing].style.background = "rgba(105, 105, 105, 0.1)";
-        // }
-
         const playlist_play_icon = document.getElementById(`${playlist_indexing + 1}`);
         if (playlist_play_icon) {
             playlist_play_icon.classList.remove("bi-play-circle-fill");
@@ -467,12 +458,6 @@ if (back) {
     back.addEventListener('click', play_previous_song);
 }
 
-/* ---------------- 8. Playlist UI Helpers ---------------- */
-// const makeAllBackground = () => {
-//     document.querySelectorAll("#playlist_songs li").forEach((el) => {
-//         el.style.background = "rgb(49, 46, 46)";
-//     });
-// };
 
 const makeAllPlays = () => {
     document.querySelectorAll(".playListPlay").forEach((el) => {
@@ -643,12 +628,6 @@ function setupPlaylistClickEvents() {
                 togglePlayPause();
             } else {
                 makeAllPlays();
-                // makeAllBackground();
-                
-                // const listItems = document.querySelectorAll("#playlist_songs li");
-                // if (listItems[clickedIndex]) {
-                //     listItems[clickedIndex].style.background = "rgba(58, 58, 91, 0.5)";
-                // }
                 
                 el.target.classList.remove("bi-play-circle-fill");
                 el.target.classList.add("bi-pause-circle-fill");
@@ -705,7 +684,7 @@ gana.addEventListener("ended", () => {
     else next_musiq();
 });
 
-loginBtn.addEventListener('click', ()=>{
+loginBtn?.addEventListener('click', ()=>{
     if ((!isDeleteMode || loginBtn.innerText.trim().toLowerCase().includes(('Logout').trim().toLowerCase())) && localStorage.getItem('token')) {
         localStorage.removeItem('token');
         localStorage.removeItem('user');
@@ -741,28 +720,6 @@ async function handleDeleteAccount() {
         window.alert('Login First')
     }
 }
-// async function isDeletionConfirm(){
-//     if (localStorage.getItem('token')) {
-//         const PassConfirmInpValue = PassConfirmInp.value;
-//         const responce = await verifyPasswoard(PassConfirmInpValue);
-
-//         if (responce.success) {
-//             checkPass.innerText = 'Delete Account';
-//             window.alert('Passwoard Confirmed!');
-//             await handleDeleteAccount();
-//         }
-//         else{
-//             checkPass.innerText = 'Delete Account';
-//             window.alert(responce.message);
-//             deletionCloseBtn.click();
-//         } 
-//     }
-// }
-// checkPass?.addEventListener('click', ()=>{
-//     deletion_popup.style.display = 'none';
-//     deletion_popupC.style.width = '0';
-//     deletion_popupC.style.height = '0';
-// });
 
 async function isDeletionConfirm() {
     if (!localStorage.getItem('token')) {
@@ -816,7 +773,7 @@ deletionCloseBtn?.addEventListener('click', ()=>{
     PassConfirmInp.value = '';
 });
 
-signinBtn.addEventListener('click', (e) => {
+signinBtn?.addEventListener('click', (e) => {
     if (
         (isDeleteMode ||
         signinBtn.innerText.trim().toLowerCase().includes("delete account".toLowerCase()))
@@ -829,19 +786,6 @@ signinBtn.addEventListener('click', (e) => {
         deletion_popupC.style.height = '60vh';
     }
 });
-
-// signinBtn.addEventListener('click', (e)=>{
-//     if ((isDeleteMode || signinBtn.innerText.trim().toLowerCase().includes(('Delete Account').trim().toLowerCase())) && localStorage.getItem('token')) {
-//         e.preventDefault();
-//         deletion_popup.style.display = 'flex';
-//         deletion_popupC.style.width = '70vw';
-//         deletion_popupC.style.height = '60vh';
-//         checkPass?.addEventListener('click', async()=>{
-//             await isDeletionConfirm();
-//             checkPass.innerText = 'Loading...';   
-//         });    
-//     }
-// });
 
 if (closePlayerBtn) {
     closePlayerBtn.addEventListener('click', ()=>{
@@ -866,47 +810,23 @@ gana.addEventListener("pause", () => {
 
 let options = document.getElementById("options");
 
-function display_nav_bar(){
-    if (media_query_for_mobile.matches && options){
-        // const options = document.getElementById("options");
-        // options.style.right = "0px";
+function display_nav_bar() {
+    if (media_query_for_mobile.matches && options) {
+        options.style.display = "flex";
         options.style.opacity = "1";
-        
+        options.style.pointerEvents = "auto";
     }
 }
-function close_nav_bar(){
-    if (media_query_for_mobile.matches && options){
-        // const options = document.getElementById("options");
-        // options.style.right = "-200px";
+
+function close_nav_bar() {
+    if (media_query_for_mobile.matches && options) {
         options.style.opacity = "0";
+        options.style.pointerEvents = "none";
+        options.style.display = "none";
     }
 }
 document.getElementById('close')?.addEventListener('click', close_nav_bar);
 document.getElementById('mobile_list_icon')?.addEventListener('click', display_nav_bar);
-// Handle hash change and screen size
-// function handleHashChange() {
-//   const isMobile = media_query_for_mobile.matches;
-//   const hash = location.hash;
-
-//   if (isMobile) {
-//     switch (hash) {
-//       case "#playlist":
-//         showSection({ playList: true });
-//         break;
-//       case "#search":
-//         showSection({ search: true });
-//         break;
-//       default:
-//         showSection({ home: true });
-//         break;
-//     }
-//   } else {
-//     // Desktop view: show all except search
-//     showSection({ desktop: true });
-//   }
-// }
-// const playlist = document.getElementById("playlist");
-// const songs = document.getElementById("songs");
 
 // Handle hash change and screen size
 function handleHashChange() {
