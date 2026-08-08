@@ -113,6 +113,7 @@ html,body{
     justify-content: space-around;
     align-items: center;
     font-family: var(--font-display);
+    transition: opacity 0.3s ease;
 }
 #web_header #options li{
     list-style: none;
@@ -1913,6 +1914,7 @@ footer h3{
     #web_header  #options{
         height: 79vh;
         opacity: 0;
+        display: none;
     }
     #main #sub_main{
         height: 80%;
