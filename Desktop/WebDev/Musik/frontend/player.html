@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" type="image/png" href="./images/musik-modified.png">
+  <title>Musik - Player</title>
+  
+  <!-- FIX: Added Bootstrap Icons CSS CDN -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+  <link rel="stylesheet" href="./CSS/player.css">
+</head>
+<body>
+
+  <!-- MAIN DASHBOARD CONTAINER -->
+  <div class="dashboard">
+
+    <!-- TOPBAR -->
+    <header class="topbar">
+      <div class="logo">MUSIK</div>
+
+      <div class="topbar-actions">
+        <button class="icon-btn" title="Notifications"><i class="bi bi-bell"></i></button>
+        <div class="avatar">🎧</div>
+      </div>
+    </header>
+
+    <!-- DASHBOARD BODY -->
+    <div class="dashboard-body">
+
+      <!-- LEFT SIDEBAR -->
+      <nav class="sidebar">
+        <button class="active" title="Home"><i class="bi bi-house-fill"></i></button>
+        <!-- FIX: Updated unique ID -->
+        <button title="Like" id="likeBtn"><i class="bi bi-heart"></i></button>
+        <button title="Add To Playlist" id="addToPlaylistBtn"><i class="bi bi-bookmark-plus"></i></button>
+        <button title="Settings"><i class="bi bi-sliders"></i></button>
+        <button class="delete-song-btn" title="Delete Song">
+            <i class="bi bi-trash3-fill"></i>
+        </button>
+        <button title="Update Song Details" class="updateSongBtn"><i class="bi bi-pencil-square"></i></button>
+      </nav>
+
+      <!-- CENTER PLAYER PANEL -->
+      <main class="player-panel">
+        
+        <!-- Album Art Wrapper -->
+        <div class="album-wrapper">
+          <div class="album-art" id="albumArt"><img src="" alt="Album Art"></div>
+        </div>
+
+        <!-- Song Info Block -->
+        <div class="song-info">
+          <div class="title-row">
+            <h2 id="songTitle">Loading...</h2>
+            <!-- FIX: Updated unique ID -->
+            <button class="like-btn" id="likeBtn"><i class="bi bi-heart"></i></button>
+          </div>
+          <span class="genre" id="songGenre">Artist</span>
+        </div>
+
+        <!-- Progress / Waveform Row -->
+        <div class="progress-row">
+          <span class="time" id="currentTime">0:00</span>
+          <div class="waveform" id="waveform"></div>
+          <span class="time" id="totalTime">0:00</span>
+        </div>
+
+        <!-- Player Controls Block -->
+        <div class="controls-wrapper">
+          <div class="controls">
+            <button id="prevBtn" title="Previous"><i class="bi bi-skip-start-fill"></i></button>
+            <button id="playBtn" class="play-btn" title="Play/Pause"><i class="bi bi-play-fill" id="playIcon"></i></button>
+            <button id="nextBtn" title="Next"><i class="bi bi-skip-end-fill"></i></button>
+          </div>
+        </div>
+
+      </main>
+
+      <!-- RIGHT SIDE PANEL -->
+      <aside class="playlist-panel">
+        
+        <div class="categories-section">
+          <h3>Categories</h3>
+          <div class="category-pills">
+            <span class="pill active">Classic</span>
+            <span class="pill">Instrumental</span>
+            <span class="pill">Pop</span>
+          </div>
+        </div>
+
+        <!-- Playlist Block -->
+        <div class="playlist-section">
+          <h3>Playlist</h3>
+          <ul id="playlist">
+            <!-- Dynamic JS Items -->
+          </ul>
+        </div>
+
+      </aside>
+
+    </div>
+  </div>
+
+  <!-- FIX: Added type="module" for ES6 Import support -->
+  <script type="module" src="JS/player.js"></script>
+  <!-- <script type="module" src="JS/index.js"></script> -->
+</body>
+</html>
