@@ -2287,6 +2287,9 @@ footer h3{
     #main #sub_main #songs #trending_songs .trending_song_item {
         width: 70%;
     }
+    .user_info{
+        width: 150px;
+    }
     #user_avatar{
         width: 30px;
         height: 30px;
