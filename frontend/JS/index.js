@@ -283,24 +283,6 @@ function renderPlaylist() {
     });
 }
 
-// function renderPlaylist(){
-//     const playlist_songs = document.getElementById('playlist_songs');
-//     if (playlist_songs) {
-//         playlist_songs.innerHTML = '';
-
-//         allPlaylistSongs?.forEach((song, i) =>{
-//             let playlistSongli = document.createElement('li');
-
-//             playlistSongli.innerHTML = renderPlaylistSong(song, i);
-
-//             playlist_songs.appendChild(playlistSongli);
-//         });
-        
-//     }
-//     playListPlay = document.querySelectorAll("#playlist_songs li .playListPlay") || null;
-//     // console.log('yes', document.querySelectorAll("#playlist_songs .playListPlay"))
-// }
-
 function playerPage() {
     // FIX: JSON.stringify is required for objects/arrays in localStorage
     if (localStorage.getItem('token')) {
@@ -1115,7 +1097,7 @@ function showSection({
     }
 
 
-    if (playList) {
+    if (playList && allPlaylistSongs.length > 0) {
         renderPlaylist();
     }
 }
