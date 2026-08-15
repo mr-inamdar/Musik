@@ -1,6 +1,6 @@
 // import { renderSongs } from "./renderFunctions";
 
-const url = 'http://localhost:4000';
+const url = 'https://musik-ayb8.onrender.com';
 let allSongs = [];
 let allPlaylistSongs = [];
 
