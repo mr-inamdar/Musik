@@ -1,4 +1,4 @@
-const url = "http://localhost:4000";
+const url = "https://musik-ayb8.onrender.com";
 const submitBtn = document.getElementById("submitBtn");
 
 document.getElementById("signupForm").addEventListener("submit", async (e) => {
