@@ -1,0 +1,230 @@
+@import url("https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css");
+@import url("https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700;9..144,900&family=Manrope:wght@400;500;600;700;800&display=swap");
+
+/* ==========================================================================
+   MUSIK — DESIGN SYSTEM v2  ·  "Noir & Rose Gold"
+   ==========================================================================
+   Major visual-identity update. Every token below keeps its ORIGINAL name
+   so every page that already consumes these variables (dashboard, player,
+   upload form, auth pages) re-themes automatically — no HTML/JS touched.
+
+   PALETTE:      Black / Charcoal  +  Rose Gold  +  Metallic Gold
+   LIGHT MODE:   Ivory / Warm White + Rose Gold + Champagne Gold
+   BALANCE:      ~70% surface, ~20% type/border, ~10% gold/rose-gold accent
+
+   To restyle the whole app, edit values here only.
+   ========================================================================== */
+
+:root{
+    /* ---- Surfaces : deep black -> charcoal elevation ladder ---- */
+    --bg-0:#07070a;              /* app floor / deepest black            */
+    --bg-1:#0d0d12;              /* base surface (panels, header)        */
+    --bg-2:#141419;              /* raised surface (inputs, chips)       */
+    --bg-3:#1b1b22;              /* card surface                         */
+    --bg-4:#25252f;              /* hover / active surface               */
+    --bg-5:#32323e;              /* strongest neutral surface            */
+    --bg-6:#32323e8f;            /* translucent neutral (hover glass)    */
+    --surface: var(--bg-4);      /* alias used by song cards on hover    */
+    --surface-glass: rgba(20, 20, 25, .62);
+
+    /* ---- Rose Gold + Metallic Gold accents (used sparingly, ~10%) ---- */
+    --accent-gold:#d4af37;
+    --accent-gold-soft:#e8c96b;
+    --accent-gold-dim:#a3821f;
+
+    --accent-rose:#b76e79;
+    --accent-rose-soft:#d99aa3;
+    --accent-rose-dim:#8a4f58;
+
+    /* Signature luxury gradients, built from the same two accents */
+    --grad-gold: linear-gradient(135deg, var(--accent-gold-soft), var(--accent-gold-dim));
+    --grad-rosegold: linear-gradient(135deg, var(--accent-rose-soft), var(--accent-gold));
+    --grad-hairline: linear-gradient(90deg, transparent, var(--accent-gold), var(--accent-rose), transparent);
+    --grad-surface: linear-gradient(160deg, var(--bg-3), var(--bg-1));
+
+    /* ---- Type ---- */
+    --text-hi:#f5efe6;            /* warm off-white, primary text        */
+    --text-lo:#a8a19a;            /* secondary text                      */
+    --text-faint:#6f6a64;         /* tertiary / metadata text            */
+    --text-dim: var(--text-lo);   /* alias - used across the app         */
+
+    /* ---- Depth ---- */
+    --shadow-color: rgba(0, 0, 0, 0.62);
+    --shadow-lg: rgba(0, 0, 0, 0.55);
+    --border-soft: rgba(212, 175, 55, 0.16);
+    --border-strong: rgba(212, 175, 55, 0.4);
+    --overlay-scrim: rgba(7, 7, 10, 0.78);
+
+    --glow-gold: 0 0 22px rgba(212, 175, 55, 0.22);
+    --glow-rose: 0 0 22px rgba(183, 110, 121, 0.22);
+    --elev-1: 0 2px 10px rgba(0,0,0,.35);
+    --elev-2: 0 12px 30px -10px rgba(0,0,0,.6);
+    --elev-3: 0 26px 60px -18px rgba(0,0,0,.7);
+
+    /* ---- Shape ---- */
+    --radius-sm: 10px;
+    --radius-md: 16px;
+    --radius-lg: 26px;
+    --radius-xl: 32px;
+    --radius-pill: 999px;
+
+    /* ---- Motion ---- */
+    --ease: cubic-bezier(.22,1,.36,1);
+    --ease-out: cubic-bezier(.16,1,.3,1);
+    --t-fast: .18s var(--ease);
+    --t-med: .4s var(--ease);
+    --t-slow: .7s var(--ease);
+
+    /* ---- Type family ---- */
+    --font-display: 'Fraunces', 'Times New Roman', serif;
+    --font-body: 'Manrope', 'Segoe UI', sans-serif;
+
+    color-scheme: dark;
+}
+
+/* Light mode - NOT an inverted dark theme: warm ivory + rose/champagne gold */
+@media (prefers-color-scheme: light){
+    :root{
+        --bg-0:#faf7f2;
+        --bg-1:#ffffff;
+        --bg-2:#f3ede4;
+        --bg-3:#ece2d3;
+        --bg-4:#e2d3bd;
+        --bg-5:#d8c7a8;
+        --bg-6:#d8c7a880;
+        --surface: var(--bg-4);
+        --surface-glass: rgba(255, 255, 255, .66);
+
+        --accent-gold:#b8942e;
+        --accent-gold-soft:#d6b85a;
+        --accent-gold-dim:#8f7220;
+
+        --accent-rose:#a95c68;
+        --accent-rose-soft:#c9828c;
+        --accent-rose-dim:#7c434c;
+
+        --grad-gold: linear-gradient(135deg, var(--accent-gold-soft), var(--accent-gold-dim));
+        --grad-rosegold: linear-gradient(135deg, var(--accent-rose-soft), var(--accent-gold));
+        --grad-surface: linear-gradient(160deg, #ffffff, var(--bg-2));
+
+        --text-hi:#1a1611;
+        --text-lo:#6b6255;
+        --text-faint:#948a78;
+        --text-dim: var(--text-lo);
+
+        --shadow-color: rgba(90, 65, 20, 0.14);
+        --shadow-lg: rgba(104, 78, 31, 0.14);
+        --border-soft: rgba(169, 92, 104, 0.22);
+        --border-strong: rgba(169, 92, 104, 0.45);
+        --overlay-scrim: rgba(250, 247, 242, 0.85);
+
+        --glow-gold: 0 0 22px rgba(184, 148, 46, 0.18);
+        --glow-rose: 0 0 22px rgba(169, 92, 104, 0.16);
+        --elev-1: 0 2px 10px rgba(90,65,20,.08);
+        --elev-2: 0 12px 30px -10px rgba(90,65,20,.18);
+        --elev-3: 0 26px 60px -18px rgba(90,65,20,.22);
+
+        color-scheme: light;
+    }
+}
+
+/* Same values are also available behind [data-theme="light"] in case a
+   manual theme-toggle is wired up later - purely additive, no risk. */
+[data-theme="light"]{
+    --bg-0:#faf7f2; --bg-1:#ffffff; --bg-2:#f3ede4; --bg-3:#ece2d3; --bg-4:#e2d3bd; --bg-5:#d8c7a8; --bg-6:#d8c7a880;
+    --surface: var(--bg-4); --surface-glass: rgba(255, 255, 255, .66);
+    --accent-gold:#b8942e; --accent-gold-soft:#d6b85a; --accent-gold-dim:#8f7220;
+    --accent-rose:#a95c68; --accent-rose-soft:#c9828c; --accent-rose-dim:#7c434c;
+    --grad-gold: linear-gradient(135deg, var(--accent-gold-soft), var(--accent-gold-dim));
+    --grad-rosegold: linear-gradient(135deg, var(--accent-rose-soft), var(--accent-gold));
+    --grad-surface: linear-gradient(160deg, #ffffff, var(--bg-2));
+    --text-hi:#1a1611; --text-lo:#6b6255; --text-faint:#948a78; --text-dim: var(--text-lo);
+    --shadow-color: rgba(90, 65, 20, 0.14); --shadow-lg: rgba(104, 78, 31, 0.14);
+    --border-soft: rgba(169, 92, 104, 0.22); --border-strong: rgba(169, 92, 104, 0.45);
+    --overlay-scrim: rgba(250, 247, 242, 0.85);
+    color-scheme: light;
+}
+
+/* Jinke device par "reduce motion" on hai unke liye saari animation band */
+@media (prefers-reduced-motion: reduce){
+    *, *::before, *::after{
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+    }
+}
+
+@font-face {
+    font-family: 'PrroRacingOutline';
+    src: url('../data/Pro\ Racing\ Outline.otf');
+}
+
+/* ---------------- Reset (sab pages ke liye common) ---------------- */
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: var(--font-body);
+}
+
+html, body{
+    min-height: 100vh;
+    background: var(--bg-0);
+    color: var(--text-hi);
+}
+
+::selection{
+    background: var(--accent-gold);
+    color: var(--bg-0);
+}
+
+:focus-visible{
+    outline: 2px solid var(--accent-gold);
+    outline-offset: 2px;
+    border-radius: var(--radius-sm);
+}
+
+a{
+    color: var(--accent-gold-soft);
+}
+
+button{
+    font-family: inherit;
+}
+
+/* Slim gold-tinted scrollbar for browsers that don't hide it explicitly */
+::-webkit-scrollbar{ width: 6px; height: 6px; }
+::-webkit-scrollbar-track{ background: transparent; }
+::-webkit-scrollbar-thumb{ background: var(--border-strong); border-radius: var(--radius-pill); }
+
+/* ---------------- Motion bank (shared keyframes) ---------------- */
+@keyframes cardRise{
+    from{ opacity: 0; transform: translateY(22px) scale(.97); }
+    to{ opacity: 1; transform: translateY(0) scale(1); }
+}
+@keyframes floatIdle{
+    0%, 100%{ transform: translateY(0px); }
+    50%{ transform: translateY(-5px); }
+}
+@keyframes borderTravel{
+    0%{ background-position: 0% 50%; }
+    50%{ background-position: 100% 50%; }
+    100%{ background-position: 0% 50%; }
+}
+@keyframes spin{
+    from{ transform: rotate(0deg); }
+    to{ transform: rotate(360deg); }
+}
+@keyframes shimmerSweep{
+    from{ transform: translateX(-120%) skewX(-15deg); }
+    to{ transform: translateX(220%) skewX(-15deg); }
+}
+@keyframes glowPulseText{
+    0%, 100%{ text-shadow: 0 0 6px var(--border-soft); }
+    50%{ text-shadow: 0 0 16px var(--accent-gold), 0 0 4px var(--accent-rose); }
+}
+@keyframes ringPulse{
+    0%{ transform: scale(1); opacity: .5; }
+    100%{ transform: scale(1.6); opacity: 0; }
+}
