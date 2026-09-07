@@ -1,5 +1,5 @@
-CREATE DATABASE musikkk;
-USE musikkk;
+-- CREATE DATABASE musikkk;
+-- USE musikkk;
 
 -- =========================
 -- USERS

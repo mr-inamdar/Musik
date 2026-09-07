@@ -386,6 +386,9 @@ albumForm.addEventListener(
         //     alert(responce.message)
         //     console.log("vhwvjd2")
         // }
+
+        const uploadAlbumBtn = document.getElementById('uploadAlbumBtn');
+        uploadAlbumBtn.innerText = 'Uploading...';
         try {
 
             const response =

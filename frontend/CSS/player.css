@@ -484,7 +484,130 @@ button {
     color: var(--accent-gold);
     animation: iconBounce .6s var(--ease, ease);
 }
+.confirm_overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.65);
 
+    display: none;
+    align-items: center;
+    justify-content: center;
+
+    z-index: 9999;
+
+    backdrop-filter: blur(5px);
+}
+
+.confirm_overlay.active {
+    display: flex;
+}
+
+.confirm_popup {
+    width: 380px;
+    max-width: calc(100% - 30px);
+
+    padding: 30px 25px;
+
+    border-radius: 18px;
+
+    background: #151522;
+
+    text-align: center;
+
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+
+    animation: popupShow 0.2s ease;
+}
+
+@keyframes popupShow {
+
+    from {
+        opacity: 0;
+        transform: scale(0.9);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+
+}
+
+.confirm_icon {
+    width: 60px;
+    height: 60px;
+
+    margin: 0 auto 15px;
+
+    border-radius: 50%;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: rgba(255, 70, 70, 0.12);
+
+    color: #ff5252;
+
+    font-size: 25px;
+}
+
+.confirm_popup h3 {
+    margin: 0 0 10px;
+
+    color: white;
+
+    font-size: 22px;
+}
+
+.confirm_popup p {
+    margin-bottom: 25px;
+
+    color: #aaa;
+
+    line-height: 1.5;
+
+    font-size: 14px;
+}
+
+.confirm_buttons {
+    display: flex;
+    gap: 12px;
+}
+
+.confirm_buttons button {
+    flex: 1;
+
+    padding: 11px 15px;
+
+    border: none;
+
+    border-radius: 10px;
+
+    cursor: pointer;
+
+    font-size: 14px;
+
+    transition: 0.2s;
+}
+
+.cancel_btn {
+    background: #292936;
+    color: white;
+}
+
+.cancel_btn:hover {
+    background: #383847;
+}
+
+.delete_btn {
+    background: #e53935;
+    color: white;
+}
+
+.delete_btn:hover {
+    background: #ff4d49;
+}
 /* ==========================================================================
    Responsive — same idea as index.css: below 850px the grid becomes a
    single column, so dashboard-body switches to a % height stack instead

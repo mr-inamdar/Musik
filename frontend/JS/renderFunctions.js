@@ -57,7 +57,7 @@ export function renderPlaylistSong(song, i){
 }
 
 
-export function renderAlbum(album) {
+export function renderAlbum(album, currentUserName) {
 
     const albumName = album.albumName;
 
@@ -74,12 +74,43 @@ export function renderAlbum(album) {
 
         </div>
 
-        <h5>
-            ${albumName}
-            <div class="subtitle">
-                ${album.songs.length} Songs
+        <div id="albumdetails">
+
+            <h5>
+                ${albumName}
+
+                <div class="subtitle">
+                    ${album.songs.length} Songs
+                </div>
+            </h5>
+
+            <button class="album-menu-btn">
+                ⋮
+            </button>
+
+            <div class="album-menu" id="album-menu-${album.album_id}">
+
+                ${
+                    String(album.songs[0].uploadBy) === String(currentUserName)
+                    ? `
+                        <button class='editAlbum'>
+                            ✏️ Edit Album
+                        </button>
+
+                        <button class='deleteAlbum'>
+                            🗑️ Delete Album
+                        </button>
+                    `
+                    : ""
+                }
+
+                <button class='downloadAlbum'>
+                    ⬇️ Download Album
+                </button>
+
             </div>
-        </h5>
+
+        </div>
 
         <div class="album_songs_panel">
 

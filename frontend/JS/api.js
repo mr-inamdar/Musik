@@ -3,7 +3,6 @@
 const url = 'https://musik-ayb8.onrender.com';
 let allSongs = [];
 let allPlaylistSongs = [];
-let  allAlbums = [];
 
 
 export async function fetchAllSongs(){
@@ -29,6 +28,101 @@ export async function fetchAllSongs(){
     });
 
     return allSongs;
+}
+
+export async function login(email, password) {
+    await fetch(`${url}/auth/login`,{
+        method:"POST",
+        headers:{
+            "Content-Type":"application/json"
+        },
+        body:JSON.stringify({email: email, password: password})
+    })
+    .then(res=>res.json())
+    .then(data=>{
+
+       if (data.success) {
+
+            localStorage.setItem("token", data.token);
+
+            localStorage.setItem(
+                "user",
+                JSON.stringify(data.user)
+            );
+
+            alert("Login Successful");
+
+            window.location.href = "index.html";
+
+        } else {
+
+            alert(data.message);
+
+        }
+
+
+    })
+    .catch(err => {
+
+        console.error(err);
+
+        // submitBtn.disabled = false;
+        // submitBtn.innerText = "Login";
+
+        alert("Server Error");
+
+    });
+}
+export async function singIn(name,email,password) {
+    await fetch(`${url}/auth/register`, {
+
+        method: "POST",
+
+        headers: {
+            "Content-Type": "application/json"
+        },
+
+        body: JSON.stringify({
+
+            name: name,
+            email: email,
+            password: password
+        })
+
+    })
+    .then(res => res.json())
+    .then(data => {
+
+        if (data.success) {
+
+            localStorage.setItem("token", data.token);
+
+            localStorage.setItem(
+                "user",
+                JSON.stringify(data.user)
+            );
+
+            alert("Signup & Login Successful");
+
+            window.location.href = "index.html";
+
+        } else {
+
+            alert(data.message);
+
+        }
+
+    })
+    .catch(err => {
+
+        console.error(err);
+
+        // submitBtn.disabled = false;
+        // submitBtn.innerText = "Sign Up";
+
+        alert("Server Error");
+
+    });
 }
 
 export async function uploadSong(formData) {
@@ -185,6 +279,28 @@ export async function uploadAlbum(data, count) {
 
     return responce.json();
 }
+
+export async function deleteAlbum(albumId) {
+    const responce = await fetch(`${url}/albums/delete/${albumId}`, {
+        method: 'DELETE',
+        headers:{
+            "Authorization":`Bearer ${localStorage.getItem("token")}`
+        }
+    });
+    return responce.json();
+}
+
+export async function updateAlbum(albumId, songCount, newSongCount, data) {
+    const responce = await fetch(`${url}/albums/update/${albumId}/${songCount}/${newSongCount}`, {
+        method: 'PUT',
+        headers:{
+            "Authorization":`Bearer ${localStorage.getItem("token")}`
+        },
+        body: data
+    });
+
+    return responce.json();
+};
 
 // export async function fetchAllAlbums() {
 //     await fetch(`${url}/albums`,{

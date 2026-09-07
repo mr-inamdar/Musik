@@ -46,14 +46,40 @@ async function uploadAlbum(albumName, userId) {
 //     return result[0];
 // }
 
-async function deleteAlbum(userId) {
+async function deleteAlbum(userId, albumId) {
     const sql = `
-       DELETE FROM Album WHERE uploadedBy = ?     
+       DELETE FROM albums WHERE uploadedBy = ? AND album_id = ?    
     `;
-    const [result] = await pool.query(sql, [userId])
+    const [result] = await pool.query(sql, [userId, albumId]);
+
+    return result.insertId;
 };
+
+async function findAlbum(albumId) {
+    const sql = `
+               SELECT * FROM albums 
+               WHERE album_id = ?
+    `;
+    const [rows] = await pool.query(sql, [albumId]);console.log(rows);
+    
+
+    
+
+    return rows[0];
+}
+
+async function updateAlbum(album_name, albumId) {
+    sql = `UPDATE albums
+            SET albumName = ?
+            WHERE album_id = ?
+    `;
+
+    const [result] = await pool.query(sql, [album_name, albumId]);
+}
 
 module.exports = {
     uploadAlbum,
-    deleteAlbum
+    deleteAlbum,
+    findAlbum,
+    updateAlbum
 }

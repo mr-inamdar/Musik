@@ -222,6 +222,34 @@ exports.deleteSong = async (req, res) => {
             });
         }
 
+        if (song.cover_public_id) {
+            try {
+                await deleteFromCloudinary(
+                    song.cover_public_id,
+                    "image"
+                );
+            } catch (deleteError) {
+                console.error(
+                    "Old image delete failed:",
+                    deleteError
+                );
+            }
+        }
+
+        if (song.audio_public_id) {
+            try {
+                await deleteFromCloudinary(
+                    song.audio_public_id,
+                    "video"
+                );
+            } catch (deleteError) {
+                console.error(
+                    "Old audio delete failed:",
+                    deleteError
+                );
+            }
+        }
+
         await Song.deleteSong(id);
 
         return res.status(200).json({
@@ -375,8 +403,7 @@ exports.updateSong = async (req, res) => {
         const { songId } = req.params;
         const {
             title,
-            artist,
-            album
+            artist
         } = req.body;
 
         const userId = req.user.id;

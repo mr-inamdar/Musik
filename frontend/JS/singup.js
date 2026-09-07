@@ -1,5 +1,8 @@
 // const url = "http://localhost:4000";
-const url = 'https://musik-ayb8.onrender.com';
+
+import { singIn } from "./api.js";
+
+// const url = 'https://musik-ayb8.onrender.com';
 const submitBtn = document.getElementById("submitBtn");
 
 document.getElementById("signupForm").addEventListener("submit", async (e) => {
@@ -21,61 +24,34 @@ document.getElementById("signupForm").addEventListener("submit", async (e) => {
         password.value = "";
         confirmPassword.value = "";
 
+        // Button reset
+        submitBtn.disabled = false;
+        submitBtn.innerText = "Sign Up";
+
         return;
     }
 
-    await fetch(`${url}/auth/register`, {
+    try {
 
-        method: "POST",
-
-        headers: {
-            "Content-Type": "application/json"
-        },
-
-        body: JSON.stringify({
-
+        await singIn(
             name,
             email,
-            password: password.value
+            password.value
+        );
 
-        })
+    } catch (error) {
 
-    })
-    .then(res => res.json())
-    .then(data => {
+        console.error("Signup error:", error);
 
-        if (data.success) {
+        alert(
+            error.message || "Something went wrong. Please try again."
+        );
 
-            localStorage.setItem("token", data.token);
-
-            localStorage.setItem(
-                "user",
-                JSON.stringify(data.user)
-            );
-
-            alert("Signup & Login Successful");
-
-            window.location.href = "index.html";
-
-        } else {
-
-            alert(data.message);
-
-        }
+    } finally {
 
         submitBtn.disabled = false;
         submitBtn.innerText = "Sign Up";
 
-    })
-    .catch(err => {
-
-        console.error(err);
-
-        submitBtn.disabled = false;
-        submitBtn.innerText = "Sign Up";
-
-        alert("Server Error");
-
-    });
+    }
 
 });

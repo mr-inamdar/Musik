@@ -25,7 +25,7 @@ document.addEventListener('DOMContentLoaded', ()=>{
     if (song) {
         document.getElementById("title").value = song.title;
         document.getElementById("artist").value = song.artist;
-        document.getElementById("album").value = song.album;
+        // document.getElementById("album").value = song.album;
         coverPreview.src = song.image;
     }
 
@@ -43,8 +43,8 @@ document.querySelector(".update-form").addEventListener("submit", async (e) => {
     if (artist.value !== song.artist)
         formData.append("artist", artist.value);
 
-    if (album.value !== song.album)
-        formData.append("album", album.value);
+    // if (album.value !== song.album)
+    //     formData.append("album", album.value);
 
     if (coverInput.files.length)
         formData.append("image", coverInput.files[0]);

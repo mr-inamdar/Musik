@@ -199,6 +199,29 @@ async function getMySongs(userId) {
 
 }
 
+async function getSongByAlbumId(albumId) {
+    const sql = `
+        SELECT
+            song_id,
+            title,
+            artist,
+            album_id,
+            cover_url,
+            cover_public_id,
+            audio_url,
+            audio_public_id,
+            likes,
+            created_at
+        FROM songs
+        WHERE album_id = ?
+        ORDER BY created_at DESC
+    `;
+
+    const [rows] = await pool.query(sql, [albumId]);
+
+    return rows;
+}
+
 module.exports={
 
     getAllSongs,
@@ -206,6 +229,7 @@ module.exports={
     createSong,
     deleteSong,
     updateSong,
-    getMySongs
+    getMySongs,
+    getSongByAlbumId
 
 };

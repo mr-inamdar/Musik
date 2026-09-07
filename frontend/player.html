@@ -101,6 +101,37 @@
 
     </div>
   </div>
+  <div id="deleteConfirmPopup" class="confirm_overlay">
+
+      <div class="confirm_popup">
+
+          <div class="confirm_icon">
+              <i class="bi bi-trash3-fill"></i>
+          </div>
+
+          <h3>Delete Album?</h3>
+
+          <p>
+              Are you sure you want to delete this album?
+              <br>
+              This action cannot be undone.
+          </p>
+
+          <div class="confirm_buttons">
+
+              <button id="cancelDeleteBtn" class="cancel_btn">
+                  Cancel
+              </button>
+
+              <button id="confirmDeleteBtn" class="delete_btn">
+                  Delete
+              </button>
+
+          </div>
+
+      </div>
+
+  </div>
 
   <!-- FIX: Added type="module" for ES6 Import support -->
   <script type="module" src="JS/player.js"></script>

@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Update Album</title>
+
+    <link rel="stylesheet" href="./CSS/theme.css">
+    <link rel="stylesheet" href="./CSS/updateAlbum.css">
+
+    <link
+        rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"
+    >
+
+    <link
+        rel="shortcut icon"
+        href="./images/musik-modified.png"
+        type="image/x-icon"
+    >
+</head>
+
+<body>
+
+<div class="update-album-container">
+
+    <!-- =========================
+         HEADER
+    ========================== -->
+
+    <div class="page-header">
+
+        <div class="header-icon">
+            <i class="bi bi-disc-fill"></i>
+        </div>
+
+        <div>
+            <h1>Update Album</h1>
+            <p>Edit your album and manage its songs</p>
+        </div>
+
+    </div>
+
+
+    <!-- =========================
+         ALBUM INFORMATION
+    ========================== -->
+
+    <section class="album-info-card">
+
+        <div class="album-details">
+
+            <div class="input-box">
+
+                <label for="albumName">
+                    Album Name
+                </label>
+
+                <div class="input-wrapper">
+
+                    <i class="bi bi-disc"></i>
+
+                    <input
+                        type="text"
+                        id="albumName"
+                        placeholder="Enter album name"
+                    >
+
+                </div>
+
+            </div>
+
+
+            <div class="album-meta">
+
+                <div class="meta-item">
+
+                    <i class="bi bi-music-note-beamed"></i>
+
+                    <div>
+                        <span>Songs</span>
+                        <strong id="songCount">0</strong>
+                    </div>
+
+                </div>
+
+
+                <div class="meta-item">
+
+                    <i class="bi bi-person"></i>
+
+                    <div>
+                        <span>Uploaded By</span>
+                        <strong id="uploadedBy">You</strong>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- =========================
+         SONGS HEADER
+    ========================== -->
+
+    <div class="songs-header">
+
+        <div>
+
+            <h2>
+                <i class="bi bi-music-note-list"></i>
+                Album Songs
+            </h2>
+
+            <p>
+                Update existing songs or add new songs
+            </p>
+
+        </div>
+
+
+        <!-- ADD NEW SONG -->
+
+        <button
+            type="button"
+            id="addNewSongBtn"
+            class="add-song-btn"
+        >
+            <i class="bi bi-plus-lg"></i>
+            Add New Song
+        </button>
+
+    </div>
+
+
+    <!-- =========================
+         EXISTING SONGS
+    ========================== -->
+
+    <div
+        id="albumSongsContainer"
+        class="album-songs-container"
+    >
+
+        <!-- Existing songs inserted by JS -->
+
+    </div>
+
+
+    <!-- =========================
+         NEW SONGS
+    ========================== -->
+
+    <div
+        id="newSongsContainer"
+        class="new-songs-container"
+    >
+
+        <!-- New songs inserted by JS -->
+
+    </div>
+
+
+    <!-- =========================
+         ACTION BUTTONS
+    ========================== -->
+
+    <div class="action-buttons">
+
+        <button
+            type="button"
+            id="cancelBtn"
+            class="cancel-btn"
+        >
+            <i class="bi bi-x-circle"></i>
+            Cancel
+        </button>
+
+
+        <button
+            type="button"
+            id="saveAlbumBtn"
+            class="save-btn"
+        >
+            <i class="bi bi-check-circle"></i>
+            Save Changes
+        </button>
+
+    </div>
+
+</div>
+
+
+<script
+    type="module"
+    src="./JS/updateAlbum.js"
+></script>
+
+</body>
+
+</html>

@@ -1,5 +1,5 @@
 // import function
-import { deleteMusikAccount, fetchAllSongs, fetchPlaylistSongs, verifyPasswoard } from "./api.js";
+import { deleteAlbum, deleteMusikAccount, fetchAllSongs, fetchPlaylistSongs, verifyPasswoard } from "./api.js";
 import { renderPosterSong, renderSong, renderTopSong, renderPlaylistSong, renderAlbum } from "./renderFunctions.js";
 
 /* ---------------- 1. DOM Elements & Global Variables ---------------- */
@@ -151,11 +151,17 @@ document.addEventListener('DOMContentLoaded', async () => {
     
     allSongs.forEach(song => {
 
-        let album = Albums.find(
-            album => album.album_id === song.album_id
-        );
+        let album = Albums.find(album => {
+            if (album.album_id != null && song.album_id != null) {
+                
+                return Number(album.album_id) === Number(song.album_id);
 
-        if (!album) {
+            }
+
+            return false;
+        });
+
+        if (!album && song.album_id != null) {
             album = {
                 album_id: song.album_id,
                 albumName: song.album,
@@ -165,7 +171,7 @@ document.addEventListener('DOMContentLoaded', async () => {
             Albums.push(album);
         }
 
-        album.songs.push(song);
+        if (album) album.songs.push(song);
     });
 
     console.log(Albums);
@@ -241,11 +247,36 @@ function renderSongs() {
 
     if (trendingSongsC) {
         trendingSongsC.innerHTML = '';
-        Albums.forEach(album => {
+        Albums.forEach((album) => {
             const songItem = document.createElement('div');
             // songItem.className = 'album_cover';
             songItem.className = 'album_item';
-            songItem.innerHTML = renderAlbum(album);
+            const user = JSON.parse(localStorage.getItem('user'))
+            songItem.innerHTML = renderAlbum(album, user.name);
+
+            const album_menu_btn = songItem.querySelector('.album-menu-btn') || null;
+
+            if (album_menu_btn) {
+                album_menu_btn.addEventListener('click', () => toggleAlbumMenu(album.album_id, album_menu_btn))
+            }
+
+            const download_album = songItem.querySelector('.downloadAlbum') || null;
+
+            if (download_album) {
+                download_album.addEventListener('click', () => downloadAlbum(album.album_id))
+            }
+
+            const edit_album = songItem.querySelector('.editAlbum') || null;
+
+            if (edit_album) {
+                edit_album.addEventListener('click', () => editAlbum(album.album_id))
+            }
+
+            const delete_album = songItem.querySelector('.deleteAlbum') || null;
+
+            if (delete_album) {
+                delete_album.addEventListener('click', () => confirmAlbumDelete(album.album_id))
+            }
 
             // const album_note = songItem.querySelector('.album_note') || null;
             // const closebtn = songItem.querySelector('.album_note') || null;
@@ -372,6 +403,75 @@ function activeSongList(note, closeBtn, songPLay) {
     }
 }
 
+async function delete_Album(albumId) {
+    const responce = await deleteAlbum(albumId);
+
+    if (responce.success) {
+        alert(responce.message);
+    }
+    else{
+        alert(responce.message);
+    }
+}
+
+function toggleAlbumMenu(albumId, album_menu_btn) {
+
+    // event.stopPropagation();
+
+    const menu = document.getElementById(`album-menu-${albumId}`) || null;
+
+    // baaki menus close
+    document.querySelectorAll(".album-menu")?.forEach(m => {
+        if (m !== menu) {
+            m.classList.remove("open");
+        }
+    });
+
+    if (menu && !menu.classList.contains('open')) {
+        album_menu_btn.classList.add('open');
+        album_menu_btn.innerText = 'x';
+    }
+    else{
+        album_menu_btn.classList.remove('open');
+        album_menu_btn.innerText = '⋮';
+    }
+
+    menu?.classList.toggle("open");
+}
+
+// document.addEventListener("click", () => {
+//     document.querySelectorAll(".album-menu").forEach(menu => {
+//         menu.classList.remove("open");
+//     });
+// });
+
+async function downloadAlbum(albumId) {
+
+    const album = Albums.find(
+        album => Number(album.album_id) === Number(albumId)
+    );
+
+    if (!album) return;
+
+    for (const song of album.songs) {
+
+        const response = await fetch(song.audio_url);
+        const blob = await response.blob();
+
+        const url = URL.createObjectURL(blob);
+
+        const a = document.createElement("a");
+        a.href = url;
+        a.download = `${song.title}.mp3`;
+
+        document.body.appendChild(a);
+        a.click();
+
+        a.remove();
+        URL.revokeObjectURL(url);
+    }
+}
+
 document.addEventListener("click", (e) => {
 
     const note = e.target.closest(".album_note");
@@ -382,6 +482,76 @@ document.addEventListener("click", (e) => {
 
 });
 
+let selectedAlbumId = null;
+
+const deleteConfirmPopup = document.getElementById("deleteConfirmPopup");
+
+const cancelDeleteBtn = document.getElementById("cancelDeleteBtn");
+
+const confirmDeleteBtn = document.getElementById("confirmDeleteBtn");
+
+
+// Open confirmation popup
+function confirmAlbumDelete(albumId) {
+
+    selectedAlbumId = albumId;
+
+    deleteConfirmPopup.classList.add("active");
+}
+
+
+// Cancel
+cancelDeleteBtn.addEventListener("click", () => {
+
+    selectedAlbumId = null;
+
+    deleteConfirmPopup.classList.remove("active");
+
+});
+
+
+// Confirm Delete
+confirmDeleteBtn.addEventListener("click", async () => {
+
+    if (!selectedAlbumId) return;
+
+    const albumId = selectedAlbumId;
+
+    selectedAlbumId = null;
+
+    deleteConfirmPopup.classList.remove("active");
+
+    delete_Album(albumId);
+
+});
+
+function editAlbum(albumId) {
+
+    const album =
+        Albums.find(
+            a =>
+                Number(a.album_id) ===
+                Number(albumId)
+        );
+
+    if (!album) {
+
+        alert("Album not found");
+
+        return;
+    }
+
+
+    localStorage.setItem(
+        "updateAlbum",
+        JSON.stringify(album)
+    );
+
+
+    window.location.href =
+        `updateAlbum.html?albumId=${albumId}`;
+
+}
 
 // Albums 
 
@@ -503,13 +673,13 @@ function searchSongs(query) {
     renderSearchResults(filteredSongs);
 }
 
-function debounce(fn, delay = 300) {
-    let timer;
-    return (...args) => {
-        clearTimeout(timer);
-        timer = setTimeout(() => { fn(...args); }, delay);
-    };
-}
+// function debounce(fn, delay = 300) {
+//     let timer;
+//     return (...args) => {
+//         clearTimeout(timer);
+//         timer = setTimeout(() => { fn(...args); }, delay);
+//     };
+// }
 
 if (search_input) {
     const handleSearch = () => {
@@ -573,7 +743,7 @@ function play_audio(song) {
     }
     
     if (palyed_song_ka_pic) palyed_song_ka_pic.src = song.image;
-    if (played_song_ka_naam_angreji) played_song_ka_naam_angreji.innerHTML = song.title + '-' + song.album;
+    if (played_song_ka_naam_angreji) played_song_ka_naam_angreji.innerHTML = song.album != null? song.title + '-' + song.album : song.title;
     if (played_song_ke_artist_ka_naam) played_song_ke_artist_ka_naam.innerHTML = song.artist;
 
     updateMediaSession(song);
@@ -752,7 +922,7 @@ function activate_song_popup(song) {
     if (!song) return;
     search_results.style.display = "none";
     if (popuppic) popuppic.src = song.image || song.image_url;
-    if (naam) naam.innerHTML = `${song.artist || ''} - ${song.title || song.name || ''} - ${song.album}`;
+    if (naam) naam.innerHTML = song.album != null? `${song.artist || ''} - ${song.title || song.name || ''} - ${song.album}` : `${song.artist || ''} - ${song.title || song.name || ''}`;
     if (uploadBy) uploadBy.innerText = song.uploadBy;
 
     if (playButton) {

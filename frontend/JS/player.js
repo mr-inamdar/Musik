@@ -381,7 +381,7 @@ async function handleSongDeletion() {
 }
 
 if (deleteSongBtn) {
-    deleteSongBtn.addEventListener("click", handleSongDeletion);
+    deleteSongBtn.addEventListener("click", () => confirmAlbumDelete(song.song_id));
 }
 
 if (updateSongBtn) {
@@ -392,3 +392,44 @@ if (updateSongBtn) {
         }
     });
 }
+
+let selectedSongId = null;
+
+const deleteConfirmPopup = document.getElementById("deleteConfirmPopup");
+
+const cancelDeleteBtn = document.getElementById("cancelDeleteBtn");
+
+const confirmDeleteBtn = document.getElementById("confirmDeleteBtn");
+
+
+// Open confirmation popup
+function confirmAlbumDelete(songId) {
+
+    selectedSongId = songId;
+
+    deleteConfirmPopup.classList.add("active");
+}
+
+
+// Cancel
+cancelDeleteBtn.addEventListener("click", () => {
+
+    selectedSongId = null;
+
+    deleteConfirmPopup.classList.remove("active");
+
+});
+
+
+// Confirm Delete
+confirmDeleteBtn.addEventListener("click", async () => {
+
+    if (!selectedSongId) return;
+
+    selectedSongId = null;
+
+    deleteConfirmPopup.classList.remove("active");
+
+    handleSongDeletion();
+
+});
